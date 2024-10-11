@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Panel de Administración - Mi Restaurante</title>
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <h1>Mi Restaurante</h1>
+            <nav>
+                <a href="#ordenes" class="active">Órdenes Actuales</a>
+                <a href="#menu">Gestionar Menú</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <h2>Órdenes Actuales</h2>
+                <button class="btn btn-outline" id="adminButton">Admin ▼</button>
+            </header>
+            <section id="ordenes">
+                <table id="ordenesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuario ID</th>
+                            <th>Estado</th>
+                            <th>Total</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas se llenarán dinámicamente con JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+            <section id="menu" style="display: none;">
+                <h3>Gestionar Menú</h3>
+                <button class="btn" id="addMenuItemBtn">Agregar Ítem al Menú</button>
+                <table id="menuTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Categoría</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas se llenarán dinámicamente con JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para agregar/editar ítems del menú -->
+    <div id="menuItemModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Agregar/Editar Ítem del Menú</h2>
+            <form id="menuItemForm">
+                <input type="hidden" id="menuItemId">
+                <label for="menuItemName">Nombre:</label>
+                <input type="text" id="menuItemName" required>
+                <label for="menuItemPrice">Precio:</label>
+                <input type="number" id="menuItemPrice" step="0.01" required>
+                <label for="menuItemCategory">Categoría:</label>
+                <select id="menuItemCategory" required>
+                    <option value="entrada">Entrada</option>
+                    <option value="plato_principal">Plato Principal</option>
+                    <option value="postre">Postre</option>
+                    <option value="bebida">Bebida</option>
+                </select>
+                <button type="submit" class="btn">Guardar</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

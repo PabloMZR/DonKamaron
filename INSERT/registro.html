@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Registro / Inicio de Sesión</title>
+</head>
+<body>
+    <div class="container">
+        <h1 id="formTitle">Iniciar Sesión</h1>
+
+        <form action="./ILogin.php" method="POST" id="loginForm">
+            <label for="loginEmail">Correo electrónico:</label>
+            <input type="email" id="loginEmail" name="email" required />
+
+            <label for="loginPassword">Contraseña:</label>
+            <input type="password" id="loginPassword" name="password" required />
+
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+
+        <form action="./IRegistro.php" method="POST" id="registerForm" style="display:none;">
+            <label for="registerName">Nombre:</label>
+            <input type="text" id="registerName" name="name" required />
+
+            <label for="registerEmail">Correo electrónico:</label>
+            <input type="email" id="registerEmail" name="email" required />
+
+            <label for="registerPassword">Contraseña:</label>
+            <input type="password" id="registerPassword" name="password" required />
+
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <div class="toggle">
+            <a href="#" id="toggleForm">¿No tienes una cuenta? Regístrate</a>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+        const toggleForm = document.getElementById("toggleForm");
+        const formTitle = document.getElementById("formTitle");
+
+        toggleForm.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (loginForm.style.display === "none") {
+                loginForm.style.display = "flex";
+                registerForm.style.display = "none";
+                toggleForm.textContent = "¿No tienes una cuenta? Regístrate";
+                formTitle.textContent = "Iniciar Sesión";
+            } else {
+                loginForm.style.display = "none";
+                registerForm.style.display = "flex";
+                toggleForm.textContent = "¿Ya tienes una cuenta? Inicia sesión";
+                formTitle.textContent = "Registro";
+            }
+        });
+    </script>
+</body>
+</html>
