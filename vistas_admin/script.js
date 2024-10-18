@@ -127,12 +127,12 @@ async function editarUsuario(id) {
 
 
 
-
+// Funciones para manejar usuarios
 async function eliminarUsuario(id) {
     if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
         try {
             const response = await fetch(`http://localhost/DonKamaron/vistas_admin/db_operations.php?action=deleteUser&id=${id}`, {
-                method: 'DELETE',
+                method: 'GET', // Cambiado de DELETE a GET para que coincida con el manejo en PHP
             });
 
             if (!response.ok) {
@@ -175,12 +175,12 @@ async function editarMenuItem(id) {
         mostrarMenuItemModal(item);
     }
 }
-
+// Funciones para manejar ítems del menú
 async function eliminarMenuItem(id) {
     if (confirm("¿Estás seguro de que deseas eliminar este ítem del menú?")) {
         try {
             const response = await fetch(`http://localhost/DonKamaron/vistas_admin/db_operations.php?action=deleteMenuItem&id=${id}`, {
-                method: 'DELETE',
+                method: 'GET', // Cambiado de DELETE a GET para que coincida con el manejo en PHP
             });
 
             if (!response.ok) {
