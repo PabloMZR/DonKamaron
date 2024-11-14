@@ -27,4 +27,5 @@ function Ejecutar($Con, $SQL) {
 function Desconectar($Con) {
     mysqli_close($Con); // Cierra la conexión
 }
+
 ?>
