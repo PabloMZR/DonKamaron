@@ -73,6 +73,7 @@ async function renderMenuTable() {
     const menuItems = await fetchData('getMenuItems');
     const tbody = $('menuTable').querySelector('tbody');
     tbody.innerHTML = '';
+
     menuItems.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -81,11 +82,15 @@ async function renderMenuTable() {
             <td>$${parseFloat(item.price).toFixed(2)}</td>
             <td>${item.category}</td>
             <td>
-                <button class="btn btn-outline" onclick="editarMenuItem(${item.id})">Editar</button>
-                <button class="btn" onclick="eliminarMenuItem(${item.id})">Eliminar</button>
+                <button class="btn btn-outline" id="edit-${item.id}">Editar</button>
+                <button class="btn" id="delete-${item.id}">Eliminar</button>
             </td>
         `;
         tbody.appendChild(tr);
+
+        // Vincula eventos dinámicamente
+        tr.querySelector(`#edit-${item.id}`).addEventListener('click', () => editarMenuItem(item.id));
+        tr.querySelector(`#delete-${item.id}`).addEventListener('click', () => eliminarMenuItem(item.id));
     });
 }
 
@@ -113,7 +118,6 @@ function mostrarUserModal(usuario = null) {
     modal.style.display = 'block'; // Muestra el modal
 }
 
-
 async function editarUsuario(id) {
     const usuarios = await fetchData('getUsers'); // Obtén la lista actualizada de usuarios
     const usuario = usuarios.find(u => u.id === String(id)); // Compara como strings
@@ -124,9 +128,6 @@ async function editarUsuario(id) {
         console.error(`Usuario con ID ${id} no encontrado`);
     }
 }
-
-
-
 // Funciones para manejar usuarios
 async function eliminarUsuario(id) {
     if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
@@ -169,12 +170,17 @@ function mostrarMenuItemModal(item = null) {
 }
 
 async function editarMenuItem(id) {
-    const menuItems = await fetchData('getMenuItems'); // Obtén la lista actualizada de ítems
-    const item = menuItems.find(i => i.id === id);
+    const menuItems = await fetchData('getMenuItems');
+    console.log('Menú completo:', menuItems); // Verifica qué datos se obtienen
+    const item = menuItems.find(i => i.id === String(id));
+    console.log('Ítem seleccionado:', item); // Verifica que el ítem se encuentra correctamente
     if (item) {
         mostrarMenuItemModal(item);
+    } else {
+        console.error(`Ítem con ID ${id} no encontrado`);
     }
 }
+
 // Funciones para manejar ítems del menú
 async function eliminarMenuItem(id) {
     if (confirm("¿Estás seguro de que deseas eliminar este ítem del menú?")) {
@@ -188,6 +194,7 @@ async function eliminarMenuItem(id) {
             }
 
             const result = await response.json();
+            console.log(result);
             if (result.success) {
                 renderMenuTable(); // Renderizar de nuevo la tabla
             } else {
