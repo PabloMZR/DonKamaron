@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Redirigir según el rol
             switch ($user['role']) {
                 case 'admin':
-                    header("Location: ../vistas_admin/index.html");
+                    header("Location: ../vistas_admin/panelAdmin.html");
                     break;
                 case 'cliente':
                     header("Location: ../vistas_usuarios/menu.html");
