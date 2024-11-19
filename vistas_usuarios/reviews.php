@@ -21,7 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     VALUES ($userId, $menuItemId, $rating, '$comment')";
     Ejecutar($Con, $insertQuery);
 
-    echo "<script>alert('Reseña enviada con éxito.');</script>";
+    // Recargar la página después de insertar la reseña
+    echo "<script>
+        alert('Reseña enviada con éxito.');
+        window.location.href = window.location.href;
+    </script>";
+    exit();
 }
 Desconectar($Con);
 ?>
@@ -40,7 +45,6 @@ Desconectar($Con);
 
     <div class="header">
         <nav>
-            <a href="#"> Bienvenido <?php echo $_SESSION["nombre"] ?></a>
             <a href="index.php">Seguir Comprando</a>
             <a href="cerrar_session.php">Salir</a>
         </nav>
