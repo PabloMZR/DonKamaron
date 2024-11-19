@@ -8,7 +8,10 @@ $password = '';
 // Obtén el correo del formulario y sanitízalo
 $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
+session_start();
+
 try {
+
     // Conexión a la base de datos usando PDO
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -16,16 +19,18 @@ try {
     // Verifica si el correo es válido
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // Prepara la consulta SQL para obtener el rol del usuario
-        $stmt = $pdo->prepare("SELECT role FROM users WHERE email = :email");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        
+
         // Verifica si se encontró el usuario
         if ($stmt->rowCount() > 0) {
             // Obtén el rol del usuario
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             $rol = $usuario['role'];
-            
+            $id = $usuario['id'];
+            $nombre = $usuario['name'];
+
             // Redirige según el rol del usuario
             if ($rol === 'admin') {
                 echo "<h3>Bienvenido, Administrador</h3>";
@@ -45,8 +50,10 @@ try {
             } elseif ($rol === 'cliente') {
                 echo "<h3>Bienvenido, Cliente</h3>";
                 // Redirigir a la página de cliente
-                // header('Location: cliente_dashboard.php');
-                // exit();
+                $_SESSION["id"]=$id;
+                $_SESSION["nombre"]=$nombre;
+                header('Location: ../vistas_usuarios/');
+                exit();
             }
         } else {
             echo "<h3>Acceso Denegado: Usuario no encontrado</h3>";
@@ -57,9 +64,6 @@ try {
     } else {
         echo "<h3>Correo inválido</h3>";
     }
-
 } catch (PDOException $e) {
     echo "Error en la conexión: " . $e->getMessage();
 }
-
-?>

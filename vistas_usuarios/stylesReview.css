@@ -1,0 +1,117 @@
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+}
+.header {
+    background-color: #f8f8f8;
+    padding: 10px;
+    text-align: center;
+}
+
+.header nav a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+}
+
+.slider-container {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+    /* Oculta cualquier contenido desbordado */
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.review-box {
+    width: 33%;
+    flex-shrink: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    margin-right: 10px;
+
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.review-box h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.review-box p {
+    font-size: 14px;
+    color: #555;
+}
+
+.review-box .rating {
+    font-weight: bold;
+}
+
+.review-box .date {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Botones de navegación */
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev {
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.next {
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.form-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+}
+
+.form-container select,
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-container button {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #4cae4c;
+}
